@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-function useDetectScroll({ thr = 0, up = "up", down = "down" }) {
+function useDetectScroll({ thr, up = "up", down = "down" }) {
   const [scrollDir, setScrollDir] = useState(down);
 
   useEffect(() => {
-    const threshold = thr >= 0 ? 0 : thr;
+    const threshold = thr ? (thr > 0 ? thr : 0) : 0;
     let lastScrollY = window.pageYOffset;
     let ticking = false;
 
