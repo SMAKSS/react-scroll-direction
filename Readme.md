@@ -30,26 +30,28 @@ then to use it within your application you can do it just like below:
 
 The useDetectScroll custom hook will accept 3 input parameter:
 
-- `thr` (`Number`): A number to indicate the threshold of firing scroll direction event, which is `0` by default and it is only accept a positive numeric value. If it gets higher value the steps will be longer.
-- `up` (`string`): A string value for the output of custom hook if the scroll direction is upward. The default value is `up`.
-- `down` (`string`): A string value for the output of custom hook if the scroll direction is downward. The default value is `down`.
+- `thr` (`number`): A number to indicate the threshold of firing scroll direction event, which is `0` by default and only accepts a positive numeric value. If it gets a higher value the steps will be longer.
+- `axis` (`string`): Indicate the page scroll axis, whether, in the `y` or `x` axes, it is `y` by default.
+- `scrollUp` (`string`): A string value for the output of the custom hook if the scroll direction is upward. The default value is `up` if the axis is `y` and `left` if the axis is `x`.
+- `scrollDown` (`string`): A string value for the output of the custom hook if the scroll direction is downward. The default value is `down` if the axis is `y` and `right` if the axis is `x`.
+- `still` (`string`): default value for the direction when there is no scrolling happening on the page. The default value is `still`.
 
 ## Examples of usage
 
-if scroll goes upward:
+### If the scroll goes upward/downward
 
 ```js
 const [scrollDir] = useDetectScroll();
 
-// scrollDir: "up"
+// scrollDir: "up"/"down"
 ```
 
-if scroll goes downward:
+### If the scroll goes left/right
 
 ```js
-const [scrollDir] = useDetectScroll();
+const [scrollDir] = useDetectScroll({ axis: "x" });
 
-// scrollDir: "down"
+// scrollDir: "left"/"right"
 ```
 
 ## Demo

@@ -1,23 +1,38 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
-function useDetectScroll({ thr, up = "up", down = "down" }) {
-  const [scrollDir, setScrollDir] = useState(down);
+function useDetectScroll(props) {
+  const {
+    thr = 0,
+    axis = "y",
+    scrollUp = axis === "y" ? "up" : "left",
+    scrollDown = axis === "y" ? "down" : "right",
+    still = "still",
+  } = props;
+  const [scrollDir, setScrollDir] = useState(still);
 
   useEffect(() => {
-    const threshold = thr ? (thr > 0 ? thr : 0) : 0;
-    let lastScrollY = window.pageYOffset;
+    const threshold = thr > 0 ? thr : 0;
     let ticking = false;
+    let lastScroll = undefined;
+
+    axis === "y"
+      ? (lastScroll = window.pageYOffset)
+      : (lastScroll = window.pageXOffset);
 
     const updateScrollDir = () => {
-      const scrollY = window.pageYOffset;
+      let scroll = undefined;
 
-      if (Math.abs(scrollY - lastScrollY) < threshold) {
+      axis === "y"
+        ? (scroll = window.pageYOffset)
+        : (scroll = window.pageXOffset);
+
+      if (Math.abs(scroll - lastScroll) < threshold) {
         ticking = false;
         return;
       }
-      setScrollDir(scrollY > lastScrollY ? down : up);
-      lastScrollY = scrollY > 0 ? scrollY : 0;
+      setScrollDir(scroll > lastScroll ? scrollDown : scrollUp);
+      lastScroll = scroll > 0 ? scrollY : 0;
       ticking = false;
     };
 
@@ -40,6 +55,8 @@ export default useDetectScroll;
 
 useDetectScroll.propTypes = {
   thr: PropTypes.number,
-  up: PropTypes.string,
-  down: PropTypes.string,
+  axis: PropTypes.string,
+  scrollUp: PropTypes.string,
+  scrollDown: PropTypes.string,
+  still: PropTypes.string,
 };
