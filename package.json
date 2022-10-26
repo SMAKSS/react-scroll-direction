@@ -32,6 +32,9 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "name": "@smakss/react-scroll-direction",
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SMAKSS/react-scroll-direction.git"
@@ -40,5 +43,5 @@
     "generate": "rollup -c"
   },
   "type": "module",
-  "version": "0.0.1"
+  "version": "0.0.2"
 }

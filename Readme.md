@@ -58,4 +58,4 @@ You can check the [working demo](https://runkit.com/smakss/) in runkit.
 
 or
 
-[![View @smakss/search](https://codesandbox.io/static/img/play-codesandbox.svg)]()
+[![View @smakss/search](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-scroll-direction-tclwvp?fontsize=14&hidenavigation=1&theme=dark)
