@@ -41,7 +41,7 @@ The useDetectScroll custom hook will accept 3 input parameter:
 ### If the scroll goes upward/downward
 
 ```js
-const [scrollDir] = useDetectScroll();
+const [scrollDir] = useDetectScroll({});
 
 // scrollDir: "up"/"down"
 ```
