@@ -4,7 +4,7 @@ import packageJson from "./package.json" assert { type: "json" };
 
 export default [
   {
-    input: "./index.js",
+    input: "src/index.js",
     output: [
       {
         file: packageJson.main,

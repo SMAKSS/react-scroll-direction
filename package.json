@@ -7,6 +7,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^23.0.2",
     "@rollup/plugin-node-resolve": "^15.0.1",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "rollup": "^3.2.3"
   },
