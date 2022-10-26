@@ -1,0 +1,43 @@
+{
+  "author": "SMAKSS",
+  "bugs": {
+    "url": "https://github.com/SMAKSS/react-scroll-direction/issues"
+  },
+  "description": "Detect scroll direction in react applications.",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^23.0.2",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "react": "^18.2.0",
+    "rollup": "^3.2.3"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/SMAKSS/react-scroll-direction#readme",
+  "keywords": [
+    "npm",
+    "yarn",
+    "react",
+    "scroll",
+    "direction",
+    "SMAKSS",
+    "CommonJS",
+    "EcmaScript",
+    "detect scroll in react",
+    "react scroll",
+    "scroll direction"
+  ],
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "name": "@smakss/react-scroll-direction",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SMAKSS/react-scroll-direction.git"
+  },
+  "scripts": {
+    "generate": "rollup -c"
+  },
+  "type": "module",
+  "version": "0.0.1"
+}
