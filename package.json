@@ -3,9 +3,6 @@
   "bugs": {
     "url": "https://github.com/SMAKSS/react-scroll-direction/issues"
   },
-  "dependencies": {
-    "react": "^18.2.0"
-  },
   "description": "Detect scroll direction in react applications.",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^23.0.2",
@@ -49,5 +46,5 @@
     "generate": "rollup -c"
   },
   "type": "module",
-  "version": "0.0.4"
+  "version": "0.0.5"
 }

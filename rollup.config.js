@@ -18,5 +18,9 @@ export default [
       },
     ],
     plugins: [resolve(), commonjs()],
+    external: [
+      ...Object.keys(packageJson.devDependencies || {}),
+      ...Object.keys(packageJson.peerDependencies || {}),
+    ],
   },
 ];
