@@ -2,7 +2,9 @@
 
 ![npm](https://img.shields.io/npm/v/@smakss/react-scroll-direction) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/@smakss/react-scroll-direction) ![NPM](https://img.shields.io/npm/l/@smakss/react-scroll-direction) ![npm](https://img.shields.io/npm/dt/@smakss/react-scroll-direction) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@smakss/react-scroll-direction)
 
-This is a custom hook for react which is useful to detect scroll direction in react applications with a efficient way and custom threshold.
+This is a custom hook for react which is useful to detect scroll direction in React applications in an efficient way with a custom threshold.
+
+This package is created on behalf of a [StackOverflow answer](https://stackoverflow.com/a/62497293/11908502) which draws some attention to itself, so if someone just wants something to work with right away, they can access it easily here.
 
 ## How it works?
 
