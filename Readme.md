@@ -6,6 +6,10 @@ This is a custom hook for react which is useful to detect scroll direction in Re
 
 This package is created on behalf of a [StackOverflow answer](https://stackoverflow.com/a/62497293/11908502) which draws some attention to itself, so if someone just wants something to work with right away, they can access it easily here.
 
+## Demo
+
+[![View @smakss/search](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-scroll-direction-tclwvp?fontsize=14&hidenavigation=1&theme=dark)
+
 ## How it works?
 
 To install it you can simply do the following command:
@@ -55,7 +59,3 @@ const [scrollDir] = useDetectScroll({ axis: "x" });
 
 // scrollDir: "left"/"right"
 ```
-
-## Demo
-
-[![View @smakss/search](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-scroll-direction-tclwvp?fontsize=14&hidenavigation=1&theme=dark)
