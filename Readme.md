@@ -1,61 +1,65 @@
-# Detect react scroll direction
+# React Scroll Direction Hook
 
 ![npm](https://img.shields.io/npm/v/@smakss/react-scroll-direction) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/@smakss/react-scroll-direction) ![NPM](https://img.shields.io/npm/l/@smakss/react-scroll-direction) ![npm](https://img.shields.io/npm/dt/@smakss/react-scroll-direction) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@smakss/react-scroll-direction)
 
-This is a custom hook for react which is useful to detect scroll direction in React applications in an efficient way with a custom threshold.
+Detect scroll direction in your React applications effortlessly using `@smakss/react-scroll-direction`, a custom React Hook with an adjustable threshold.
 
-This package is created on behalf of a [StackOverflow answer](https://stackoverflow.com/a/62497293/11908502) which draws some attention to itself, so if someone just wants something to work with right away, they can access it easily here.
+This package was inspired by a [popular StackOverflow answer](https://stackoverflow.com/a/62497293/11908502), crafted to be a ready-to-use solution for detecting scroll direction in your React applications.
 
 ## Demo
 
+Click the button below to view a demo on CodeSandbox:
+
 [![View @smakss/search](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-scroll-direction-tclwvp?fontsize=14&hidenavigation=1&theme=dark)
 
-## How it works?
+## Installation
 
-To install it you can simply do the following command:
+Install the package using npm or yarn:
 
 ```bash
-npm i @smakss/react-scroll-direction
-or
+npm install @smakss/react-scroll-direction
+# or
 yarn add @smakss/react-scroll-direction
 ```
 
-to include it with common js module you should do this:
+To include it in your project, use:
+
+CommonJS:
 
 ```js
-var { useDetectScroll } = require("@smakss/react-scroll-direction");
+const { useDetectScroll } = require("@smakss/react-scroll-direction");
 ```
 
-and to include it with ECMAscript module you can simply do this one:
+ES Module:
 
 ```js
 import { useDetectScroll } from "@smakss/react-scroll-direction";
 ```
 
-then to use it within your application you can do it just like below:
+## Usage
 
-The useDetectScroll custom hook will accept 3 input parameter:
+The `useDetectScroll` custom hook accepts an options object with the following properties:
 
-- `thr` (`number`): A number to indicate the threshold of firing scroll direction event, which is `0` by default and only accepts a positive numeric value. If it gets a higher value the steps will be longer.
-- `axis` (`string`): Indicate the page scroll axis, whether, in the `y` or `x` axes, it is `y` by default.
-- `scrollUp` (`string`): A string value for the output of the custom hook if the scroll direction is upward. The default value is `up` if the axis is `y` and `left` if the axis is `x`.
-- `scrollDown` (`string`): A string value for the output of the custom hook if the scroll direction is downward. The default value is `down` if the axis is `y` and `right` if the axis is `x`.
-- `still` (`string`): default value for the direction when there is no scrolling happening on the page. The default value is `still`.
+- `thr`: Threshold to trigger scroll direction change (default: `0`, only accepts positive values).
+- `axis`: Scroll axis (`"y"` or `"x"`, default: `"y"`).
+- `scrollUp`: Output value when scrolling up or left (default: `"up"` for y-axis, `"left"` for x-axis).
+- `scrollDown`: Output value when scrolling down or right (default: `"down"` for y-axis, `"right"` for x-axis).
+- `still`: Output value when no scrolling is detected (default: `"still"`).
 
-## Examples of usage
+## Examples
 
-### If the scroll goes upward/downward
+Detecting scroll up/down:
 
 ```js
-const [scrollDir] = useDetectScroll({});
+const scrollDir = useDetectScroll({});
 
-// scrollDir: "up"/"down"
+// Outputs: "up", "down", or "still"
 ```
 
-### If the scroll goes left/right
+Detecting scroll left/right:
 
 ```js
-const [scrollDir] = useDetectScroll({ axis: "x" });
+const scrollDir = useDetectScroll({ axis: "x" });
 
-// scrollDir: "left"/"right"
+// Outputs: "left", "right", or "still"
 ```
