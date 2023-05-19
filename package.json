@@ -11,7 +11,8 @@
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "rollup": "^3.2.3",
-    "ts-migrate": "^0.1.35"
+    "ts-migrate": "^0.1.35",
+    "typescript": "^5.0.4"
   },
   "exports": {
     "import": "./dist/esm/index.js",
