@@ -1,43 +1,52 @@
-// @ts-expect-error TS(2307): Cannot find module 'react' or its corresponding ty... Remove this comment to see the full error message
-import { useState, useEffect } from "react";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'prop... Remove this comment to see the full error message
-import PropTypes from "prop-types";
+import { useState, useEffect, useCallback } from "react";
 
-function useDetectScroll(props: any) {
+enum Axis {
+  X = "x",
+  Y = "y",
+}
+
+enum Direction {
+  Up = "up",
+  Down = "down",
+  Left = "left",
+  Right = "right",
+  Still = "still",
+}
+
+type ScrollProps = {
+  thr?: number;
+  axis?: Axis;
+  scrollUp?: string;
+  scrollDown?: string;
+  still?: string;
+};
+
+function useDetectScroll(props: ScrollProps) {
   const {
     thr = 0,
-    axis = "y",
-    scrollUp = axis === "y" ? "up" : "left",
-    scrollDown = axis === "y" ? "down" : "right",
-    still = "still",
+    axis = Axis.Y,
+    scrollUp = axis === Axis.Y ? Direction.Up : Direction.Left,
+    scrollDown = axis === Axis.Y ? Direction.Down : Direction.Right,
+    still = Direction.Still,
   } = props;
+
   const [scrollDir, setScrollDir] = useState(still);
 
-  useEffect(() => {
-    const threshold = thr > 0 ? thr : 0;
-    let ticking = false;
-    let lastScroll: any = undefined;
+  const threshold = Math.max(0, thr);
+  let ticking = false;
+  let lastScroll: number = axis === Axis.Y ? window.scrollY : window.scrollX;
 
-    axis === "y"
-      ? (lastScroll = window.pageYOffset)
-      : (lastScroll = window.pageXOffset);
+  const updateScrollDir = useCallback(() => {
+    const scroll = axis === Axis.Y ? window.scrollY : window.scrollX;
 
-    const updateScrollDir = () => {
-      let scroll = undefined;
-
-      axis === "y"
-        ? (scroll = window.pageYOffset)
-        : (scroll = window.pageXOffset);
-
-      if (Math.abs(scroll - lastScroll) < threshold) {
-        ticking = false;
-        return;
-      }
+    if (Math.abs(scroll - lastScroll) >= threshold) {
       setScrollDir(scroll > lastScroll ? scrollDown : scrollUp);
-      lastScroll = scroll > 0 ? scrollY : 0;
-      ticking = false;
-    };
+      lastScroll = Math.max(0, scroll);
+    }
+    ticking = false;
+  }, [axis, threshold, scrollDown, scrollUp]);
 
+  useEffect(() => {
     const onScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(updateScrollDir);
@@ -48,17 +57,9 @@ function useDetectScroll(props: any) {
     window.addEventListener("scroll", onScroll);
 
     return () => window.removeEventListener("scroll", onScroll);
-  }, [scrollDir]);
+  }, [updateScrollDir]);
 
   return [scrollDir];
 }
 
 export default useDetectScroll;
-
-useDetectScroll.propTypes = {
-  thr: PropTypes.number,
-  axis: PropTypes.string,
-  scrollUp: PropTypes.string,
-  scrollDown: PropTypes.string,
-  still: PropTypes.string,
-};
