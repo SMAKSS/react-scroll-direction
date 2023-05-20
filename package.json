@@ -57,5 +57,5 @@
     "lint:fix": "eslint src/**/*.ts --fix"
   },
   "type": "module",
-  "version": "2.1.0"
+  "version": "2.1.1"
 }
