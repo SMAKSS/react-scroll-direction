@@ -72,7 +72,7 @@ function useDetectScroll(props: ScrollProps): Direction {
 
   const threshold = Math.max(0, thr);
   let ticking = false;
-  let lastScroll: number = axis === Axis.Y ? window.scrollY : window.scrollX;
+  let lastScroll = 0;
 
   /** Function to update scroll direction */
   const updateScrollDir = useCallback(() => {
@@ -86,6 +86,8 @@ function useDetectScroll(props: ScrollProps): Direction {
   }, [axis, threshold, scrollDown, scrollUp]);
 
   useEffect(() => {
+    lastScroll = axis === Axis.Y ? window.scrollY : window.scrollX;
+
     /** Function to handle onScroll event */
     const onScroll = () => {
       if (!ticking) {
