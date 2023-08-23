@@ -59,7 +59,7 @@ type ScrollProps = {
  *
  * @returns {Direction} - The current direction of scrolling.
  */
-function useDetectScroll(props: ScrollProps): Direction {
+function useDetectScroll(props: ScrollProps = {}): Direction {
   const {
     thr = 0,
     axis = Axis.Y,
