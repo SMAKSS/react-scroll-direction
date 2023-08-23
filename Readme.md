@@ -60,7 +60,7 @@ The `useDetectScroll` hook takes an options object that can include the followin
 To detect upward or downward scroll:
 
 ```js
-const scrollDir = useDetectScroll({});
+const scrollDir = useDetectScroll();
 
 // Returns: "up", "down", or "still"
 ```
