@@ -1,6 +1,6 @@
 # React Scroll Direction Hook
 
-![npm](https://img.shields.io/npm/v/@smakss/react-scroll-direction) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/@smakss/react-scroll-direction) ![NPM](https://img.shields.io/npm/l/@smakss/react-scroll-direction) ![npm](https://img.shields.io/npm/dt/@smakss/react-scroll-direction) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@smakss/react-scroll-direction)
+![npm](https://img.shields.io/npm/v/@smakss/react-scroll-direction) ![Known Vulnerabilities](https://snyk.io/test/github/{smakss}/{@smakss/react-scroll-direction}/badge.svg) ![NPM](https://img.shields.io/npm/l/@smakss/react-scroll-direction) ![npm](https://img.shields.io/npm/dt/@smakss/react-scroll-direction) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@smakss/react-scroll-direction)
 
 `@smakss/react-scroll-direction` is a versatile, lightweight React hook that detects scroll direction in your application with ease. You can fine-tune its sensitivity using an adjustable threshold, catering to your application's unique needs.
 
