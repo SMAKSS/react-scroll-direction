@@ -5,6 +5,8 @@
   },
   "description": "Detect scroll direction in react applications.",
   "devDependencies": {
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.1.1",
@@ -12,9 +14,11 @@
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
     "eslint": "^8.41.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^3.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^2.8.8",
     "rollup": "^3.2.3",
     "typescript": "^5.0.4"
   },
@@ -55,9 +59,13 @@
     "url": "git+https://github.com/SMAKSS/react-scroll-direction.git"
   },
   "scripts": {
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|ts|tsx|md|gql|graphql|mdx)\"",
+    "format:check": "prettier -l \"**/*.+(js|jsx|json|yml|yaml|css|ts|tsx|md|gql|graphql|mdx)\"",
     "generate": "rollup -c",
-    "lint": "tsc --noEmit && eslint src/**/*.ts --cache --max-warnings=0",
-    "lint:fix": "eslint src/**/*.ts --fix"
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,jsx,ts,tsx --max-warnings=0 .",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "postinstall": "husky install",
+    "typecheck": "tsc -b ."
   },
   "type": "module",
   "version": "2.2.1"

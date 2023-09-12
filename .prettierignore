@@ -1,0 +1,11 @@
+package.json
+.cache
+.shadowenv.d
+.vscode
+build
+dist
+node_modules
+public
+.github
+tmp
+*.yml

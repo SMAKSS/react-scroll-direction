@@ -11,7 +11,7 @@
 Resolves #0000 <!-- link to issue or task card if one exists -->
 
 <!--
-  Share context about the problem or feature request. 
+  Share context about the problem or feature request.
   Why is this change beneficial for the users of this hook?
 -->
 

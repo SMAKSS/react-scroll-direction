@@ -1,1 +1,11 @@
+# Build files
 dist
+
+# Rollup configs
+rollup.config.js
+
+# lint-staged config
+lint-staged.config.cjs
+
+# commitlint config
+commitlint.config.cjs
