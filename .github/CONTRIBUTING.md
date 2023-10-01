@@ -20,7 +20,7 @@ First and foremost, thank you for considering contributing to @smakss/react-scro
 
 ## Coding Standards
 
-- Follow [language-specific conventions] and @smakss/react-scroll-direction's established coding style.
+- Follow [Typescript specific conventions](https://google.github.io/styleguide/tsguide.html) and @smakss/react-scroll-direction's established coding style.
 - Write tests for any new functionality.
 - Comment your code where necessary.
 
