@@ -19,7 +19,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "prettier": "^2.8.8",
-    "rollup": "^3.2.3",
+    "rollup": "^4.0.2",
     "typescript": "^5.0.4"
   },
   "exports": {
