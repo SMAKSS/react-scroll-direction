@@ -2,9 +2,10 @@
 Thank you for contributing by opening an issue! Please take a moment to review our Code of Conduct (found in the CODE_OF_CONDUCT.md file) to keep the community approachable and respectful.
 
 For bug reports, please fill out the information below to help us understand the issue and address it in a timely manner. We value your feedback and contributions.
-
-If you have a solution in mind, and you'd like to fix the issue yourself, check out our short video tutorial on making a pull request: http://kcd.im/pull-request
 -->
+
+# Brief Description
+<!-- A brief description of the issue.-->
 
 ## Environment
 
@@ -14,7 +15,6 @@ If you have a solution in mind, and you'd like to fix the issue yourself, check 
 - `npm` (or `yarn`) version:
 
 ## Code Snippet
-
 <!-- Please provide any relevant code snippets or examples here -->
 
 ```javascript
