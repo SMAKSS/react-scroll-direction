@@ -8,10 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: ["18"]
-
     steps:
     - uses: actions/checkout@v3
       with:
@@ -25,44 +21,43 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: "18"
 
     - name: Cache dependencies
-      uses: actions/cache@v2
-      id: yarn-cache
+      uses: actions/cache@v3
       with:
         path: |
           **/node_modules
-        key: ${{ runner.os }}-node-${{ matrix.node-version }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-node-18-yarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
-          ${{ runner.os }}-node-${{ matrix.node-version }}-yarn-
+          ${{ runner.os }}-node-18-yarn-
 
     - name: Install dependencies
       run: yarn install
 
     - name: Type check
       run: yarn typecheck
-      continue-on-error: false
 
     - name: Check code quality
       run: |
-        set -e
-        trap 'echo "Error in $BASH_COMMAND at line $LINENO"' ERR
         yarn lint
         yarn format:check
         yarn run --if-present generate
 
     - name: Security Audit
-      run: yarn audit --level moderate
+      run: yarn audit --level moderate || true
       continue-on-error: true
 
+    - name: Security Audit Summary
+      if: success() || failure()
+      run: yarn audit --summary
+
     - name: Archive production artifacts
-      if: always()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: build-artifacts
         path: ./build/
 
     - name: Error handling
-      if: ${{ failure() }}
+      if: failure()
       run: echo "CI failed. Please check the logs."

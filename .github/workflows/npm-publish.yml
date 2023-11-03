@@ -12,33 +12,59 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - run: yarn
+      - run: yarn generate
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built-package
+          path: |
+            ./path-to-your-build-folder
+            package.json
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: built-package
       - uses: actions/setup-node@v3
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
           scope: "@smakss"
-      - run: yarn && yarn generate
-      - run: npm publish
+      - run: |
+          if grep -q "beta" package.json; then
+            echo "Publishing Beta to npm"
+            npm publish --tag beta
+          else
+            echo "Publishing Release to npm"
+            npm publish
+          fi
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: built-package
       - uses: actions/setup-node@v3
         with:
           node-version: 18
           registry-url: https://npm.pkg.github.com/
           scope: "@smakss"
-      - run: yarn && yarn generate
-      - run: npm publish
+      - run: |
+          if grep -q "beta" package.json; then
+            echo "Publishing Beta to GitHub Package Registry"
+            npm publish --tag beta
+          else
+            echo "Publishing Release to GitHub Package Registry"
+            npm publish
+          fi
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
