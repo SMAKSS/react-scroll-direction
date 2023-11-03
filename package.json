@@ -22,31 +22,16 @@
     "rollup": "^4.2.0",
     "typescript": "^5.0.4"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "exports": {
     "import": "./dist/esm/index.js",
     "require": "./dist/cjs/index.js"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "homepage": "https://github.com/SMAKSS/react-scroll-direction#readme",
-  "keywords": [
-    "npm",
-    "yarn",
-    "react",
-    "remix",
-    "nextjs",
-    "gatsby",
-    "scroll",
-    "direction",
-    "SMAKSS",
-    "CommonJS",
-    "EcmaScript",
-    "TypeScript",
-    "detect scroll in react",
-    "react scroll",
-    "scroll direction"
-  ],
+  "keywords": ["npm", "yarn", "react", "remix", "nextjs", "gatsby", "scroll", "direction", "SMAKSS", "CommonJS", "EcmaScript", "TypeScript", "detect scroll in react", "react scroll", "scroll direction"],
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -68,5 +53,5 @@
     "typecheck": "tsc -b ."
   },
   "type": "module",
-  "version": "3.1.0-beta.1"
+  "version": "3.1.0"
 }
