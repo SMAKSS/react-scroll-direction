@@ -64,9 +64,9 @@
     "generate": "rollup -c",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,jsx,ts,tsx --max-warnings=0 .",
     "lint:fix": "eslint src/**/*.ts --fix",
-    "postinstall": "husky install",
+    "setup": "yarn && husky install",
     "typecheck": "tsc -b ."
   },
   "type": "module",
-  "version": "3.0.1"
+  "version": "3.0.2"
 }
