@@ -1,8 +1,8 @@
 # Build files
 dist
 
-# Rollup configs
-rollup.config.js
+#prettier config
+prettier.config.cjs
 
 # lint-staged config
 lint-staged.config.cjs

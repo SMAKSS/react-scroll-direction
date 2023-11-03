@@ -1,18 +1,18 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from 'react';
 
 /** Enumeration for axis values */
 export enum Axis {
-  X = "x",
-  Y = "y",
+  X = 'x',
+  Y = 'y'
 }
 
 /** Enumeration for direction values */
 export enum Direction {
-  Up = "up",
-  Down = "down",
-  Left = "left",
-  Right = "right",
-  Still = "still",
+  Up = 'up',
+  Down = 'down',
+  Left = 'left',
+  Right = 'right',
+  Still = 'still'
 }
 
 /** Type declaration for scroll properties */
@@ -65,7 +65,7 @@ function useDetectScroll(props: ScrollProps = {}): Direction {
     axis = Axis.Y,
     scrollUp = axis === Axis.Y ? Direction.Up : Direction.Left,
     scrollDown = axis === Axis.Y ? Direction.Down : Direction.Right,
-    still = Direction.Still,
+    still = Direction.Still
   } = props;
 
   const [scrollDir, setScrollDir] = useState<Direction>(still);
@@ -96,9 +96,9 @@ function useDetectScroll(props: ScrollProps = {}): Direction {
       }
     };
 
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll);
 
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, [updateScrollDir]);
 
   return scrollDir;

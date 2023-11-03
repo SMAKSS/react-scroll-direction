@@ -27,13 +27,13 @@ Then, import it into your project:
 CommonJS:
 
 ```js
-const useDetectScroll = require("@smakss/react-scroll-direction");
+const useDetectScroll = require('@smakss/react-scroll-direction');
 ```
 
 ES Module:
 
 ```js
-import useDetectScroll from "@smakss/react-scroll-direction";
+import useDetectScroll from '@smakss/react-scroll-direction';
 ```
 
 For TypeScript projects, import the hook and its types:
@@ -41,8 +41,8 @@ For TypeScript projects, import the hook and its types:
 ```ts
 import useDetectScroll, {
   Axis,
-  Direction,
-} from "@smakss/react-scroll-direction";
+  Direction
+} from '@smakss/react-scroll-direction';
 ```
 
 ## Usage
@@ -68,7 +68,7 @@ const scrollDir = useDetectScroll();
 To detect left or right scroll:
 
 ```js
-const scrollDir = useDetectScroll({ axis: "x" });
+const scrollDir = useDetectScroll({ axis: 'x' });
 
 // Returns: "left", "right", or "still"
 ```

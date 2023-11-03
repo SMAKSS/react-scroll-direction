@@ -3,11 +3,7 @@
     "browser": true,
     "es6": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   // Specifying Parser
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -22,20 +18,8 @@
   // Configuring third-party plugins
   "plugins": ["@typescript-eslint"],
   // Resolve imports
-
   "rules": {
     "linebreak-style": "off",
-    // Configure prettier
-    "prettier/prettier": [
-      "error",
-      {
-        "printWidth": 80,
-        "endOfLine": "lf",
-        "singleQuote": false,
-        "tabWidth": 2,
-        "trailingComma": "es5"
-      }
-    ],
     // Disallow the `any` type.
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/ban-types": [
