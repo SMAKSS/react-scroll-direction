@@ -34,6 +34,8 @@ jobs:
           node-version: 18
           registry-url: https://registry.npmjs.org/
           scope: "@smakss"
+      - run: yarn install
+      - run: yarn generate
       - run: |
           if grep -q "beta" package.json; then
             echo "Publishing Beta to npm"
@@ -58,6 +60,8 @@ jobs:
           node-version: 18
           registry-url: https://npm.pkg.github.com/
           scope: "@smakss"
+      - run: yarn install
+      - run: yarn generate
       - run: |
           if grep -q "beta" package.json; then
             echo "Publishing Beta to GitHub Package Registry"
