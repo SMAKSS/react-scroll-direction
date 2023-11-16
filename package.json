@@ -3,7 +3,7 @@
   "bugs": {
     "url": "https://github.com/SMAKSS/react-scroll-direction/issues"
   },
-  "description": "Detect scroll direction in react applications.",
+  "description": "Effortlessly detect scroll direction in React apps with @smakss/react-scroll-direction. Perfect for React, Remix, Next.js, and Gatsby projects, offering adjustable sensitivity.",
   "devDependencies": {
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
@@ -29,9 +29,31 @@
     "import": "./dist/esm/index.js",
     "require": "./dist/cjs/index.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "homepage": "https://github.com/SMAKSS/react-scroll-direction#readme",
-  "keywords": ["npm", "yarn", "react", "remix", "nextjs", "gatsby", "scroll", "direction", "SMAKSS", "CommonJS", "EcmaScript", "TypeScript", "detect scroll in react", "react scroll", "scroll direction"],
+  "keywords": [
+    "react-scroll-direction",
+    "scroll-detection-react",
+    "react-hook-scroll",
+    "direction-detection",
+    "scroll-hook",
+    "npm",
+    "yarn",
+    "react",
+    "remix",
+    "nextjs",
+    "gatsby",
+    "scroll",
+    "direction",
+    "SMAKSS",
+    "CommonJS",
+    "EcmaScript",
+    "TypeScript",
+    "detect scroll in react",
+    "react scroll"
+  ],
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -53,5 +75,5 @@
     "typecheck": "tsc -b ."
   },
   "type": "module",
-  "version": "3.1.1"
+  "version": "3.1.2"
 }
