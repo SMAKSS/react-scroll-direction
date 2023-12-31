@@ -59,8 +59,7 @@
     "react scroll direction and position"
   ],
   "license": "MIT",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/esm/index.js",
   "name": "@smakss/react-scroll-direction",
   "peerDependencies": {
     "react": ">=16.8.0"
@@ -79,5 +78,5 @@
     "typecheck": "tsc -b ."
   },
   "type": "module",
-  "version": "4.0.0"
+  "version": "4.0.1"
 }
