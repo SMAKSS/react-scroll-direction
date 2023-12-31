@@ -8,9 +8,9 @@ export default [
     output: [
       {
         file: 'dist/index.js',
-        format: 'esm',
+        format: 'es',
         exports: 'named',
-        sourcemap: 'inline'
+        sourcemap: true
       }
     ],
     plugins: [resolve(), typescript()],
