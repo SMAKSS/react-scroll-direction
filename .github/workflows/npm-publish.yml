@@ -1,9 +1,8 @@
-name: CI/CD Pipeline
+name: "@smakss/react-scroll-direction"
 
 on:
-  push:
-    branches:
-      - master
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -22,29 +21,8 @@ jobs:
             ./path-to-your-build-folder
             package.json
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-      id-token: write
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
-          registry-url: https://registry.npmjs.org/
-      - run: yarn install
-      - name: Semantic Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
-
   publish-npm:
-    needs: release
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -57,12 +35,20 @@ jobs:
           registry-url: https://registry.npmjs.org/
           scope: "@smakss"
       - run: yarn install
-      - run: npm publish
+      - run: yarn generate
+      - run: |
+          if grep -q "beta" package.json; then
+            echo "Publishing Beta to npm"
+            npm publish --tag beta
+          else
+            echo "Publishing Release to npm"
+            npm publish
+          fi
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
   publish-gpr:
-    needs: release
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -75,6 +61,14 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: "@smakss"
       - run: yarn install
-      - run: npm publish
+      - run: yarn generate
+      - run: |
+          if grep -q "beta" package.json; then
+            echo "Publishing Beta to GitHub Package Registry"
+            npm publish --tag beta
+          else
+            echo "Publishing Release to GitHub Package Registry"
+            npm publish
+          fi
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
