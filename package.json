@@ -6,21 +6,21 @@
   "description": "Effortlessly detect scroll direction in React apps with @smakss/react-scroll-direction. Perfect for React, Remix, Next.js, and Gatsby projects, offering adjustable sensitivity.",
   "devDependencies": {
     "@commitlint/cli": "^18.2.0",
-    "@commitlint/config-conventional": "^18.1.0",
+    "@commitlint/config-conventional": "^18.4.3",
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.1.1",
-    "@types/react": "^18.2.6",
+    "@types/react": "^18.2.46",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
     "eslint": "^8.41.0",
     "eslint-config-prettier": "9.0.0",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-prettier": "^5.1.2",
     "husky": "^8.0.3",
     "lint-staged": "^15.0.2",
     "prettier": "^3.1.0",
-    "rollup": "^4.2.0",
-    "typescript": "^5.2.2"
+    "rollup": "^4.9.1",
+    "typescript": "^5.3.3"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -75,5 +75,5 @@
     "typecheck": "tsc -b ."
   },
   "type": "module",
-  "version": "3.1.4"
+  "version": "3.1.5-beta.0"
 }
