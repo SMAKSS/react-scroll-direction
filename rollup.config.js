@@ -7,10 +7,10 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        file: packageJson.module,
+        file: 'dist/index.js',
         format: 'esm',
         exports: 'named',
-        sourcemap: true
+        sourcemap: 'inline'
       }
     ],
     plugins: [resolve(), typescript()],
