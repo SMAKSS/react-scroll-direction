@@ -24,12 +24,6 @@ yarn add @smakss/react-scroll-direction
 
 Then, import it into your project:
 
-CommonJS:
-
-```js
-const useDetectScroll = require('@smakss/react-scroll-direction');
-```
-
 ES Module:
 
 ```js
