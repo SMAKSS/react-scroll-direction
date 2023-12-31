@@ -15,6 +15,19 @@ export enum Direction {
   Still = 'still'
 }
 
+type ScrollPosition = {
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+/** Type declaration for the returned scroll information */
+type ScrollInfo = {
+  scrollDir: Direction;
+  scrollPosition: ScrollPosition;
+};
+
 /** Type declaration for scroll properties */
 type ScrollProps = {
   thr?: number;
@@ -27,15 +40,16 @@ type ScrollProps = {
 /**
  * useDetectScroll hook.
  *
- * This hook provides a mechanism to detect the scroll direction.
- * It will return the scroll direction as a string (up, down, left, right, or still) based on user scrolling.
+ * This hook provides a mechanism to detect the scroll direction and position.
+ * It will return the scroll direction as a string (up, down, left, right, or still) based on user scrolling,
+ * as well as the scroll position from the top, bottom, left, and right edges of the page.
  *
  * @example
  *
  * import useDetectScroll, { Axis, Direction } from '@smakss/react-scroll-direction';
  *
  * function App() {
- *   const scrollDirection = useDetectScroll({
+ *   const { scrollDir, scrollPosition } = useDetectScroll({
  *     thr: 100,
  *     axis: Axis.Y,
  *     scrollUp: Direction.Up,
@@ -45,21 +59,17 @@ type ScrollProps = {
  *
  *   return (
  *     <div>
- *       <p>Current scroll direction: {scrollDirection}</p>
+ *       <p>Current scroll direction: {scrollDir}</p>
+ *       <p>Scroll position - Top: {scrollPosition.top}, Bottom: {scrollPosition.bottom},
+ *          Left: {scrollPosition.left}, Right: {scrollPosition.right}</p>
  *     </div>
  *   );
  * }
  *
  * @param {ScrollProps} props - The properties related to scrolling.
- * @property {number} props.thr - The threshold value which the scroll difference must exceed to update scroll direction.
- * @property {Axis} props.axis - The axis along which to detect scroll. Can be 'x' or 'y'.
- * @property {Direction} props.scrollUp - The direction to set when scrolling up or left. By default, 'up' for y-axis and 'left' for x-axis.
- * @property {Direction} props.scrollDown - The direction to set when scrolling down or right. By default, 'down' for y-axis and 'right' for x-axis.
- * @property {Direction} props.still - The direction to set when there is no scrolling. By default, 'still'.
- *
- * @returns {Direction} - The current direction of scrolling.
+ * @returns {ScrollInfo} - The current direction and position of scrolling.
  */
-function useDetectScroll(props: ScrollProps = {}): Direction {
+function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
   const {
     thr = 0,
     axis = Axis.Y,
@@ -69,6 +79,12 @@ function useDetectScroll(props: ScrollProps = {}): Direction {
   } = props;
 
   const [scrollDir, setScrollDir] = useState<Direction>(still);
+  const [scrollPosition, setScrollPosition] = useState<ScrollPosition>({
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  });
 
   const threshold = Math.max(0, thr);
   let ticking = false;
@@ -86,6 +102,29 @@ function useDetectScroll(props: ScrollProps = {}): Direction {
   }, [axis, threshold, scrollDown, scrollUp]);
 
   useEffect(() => {
+    /** Function to update scroll position */
+    const updateScrollPosition = () => {
+      const top = window.scrollY;
+      const left = window.scrollX;
+      const bottom =
+        document.documentElement.scrollHeight - window.innerHeight - top;
+      const right =
+        document.documentElement.scrollWidth - window.innerWidth - left;
+
+      setScrollPosition({ top, bottom, left, right });
+    };
+
+    /** Call the update function when the component mounts */
+    updateScrollPosition();
+
+    window.addEventListener('scroll', updateScrollPosition);
+
+    return () => {
+      window.removeEventListener('scroll', updateScrollPosition);
+    };
+  }, []);
+
+  useEffect(() => {
     lastScroll = axis === Axis.Y ? window.scrollY : window.scrollX;
 
     /** Function to handle onScroll event */
@@ -101,7 +140,7 @@ function useDetectScroll(props: ScrollProps = {}): Direction {
     return () => window.removeEventListener('scroll', onScroll);
   }, [updateScrollDir]);
 
-  return scrollDir;
+  return { scrollDir, scrollPosition };
 }
 
 export default useDetectScroll;
