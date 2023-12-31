@@ -2,13 +2,13 @@
 
 ![npm](https://img.shields.io/npm/v/@smakss/react-scroll-direction) ![NPM](https://img.shields.io/npm/l/@smakss/react-scroll-direction) ![npm](https://img.shields.io/npm/dt/@smakss/react-scroll-direction) ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/min/@smakss/react-scroll-direction)
 
-`@smakss/react-scroll-direction` is a versatile, lightweight React hook that detects scroll direction in your application with ease. You can fine-tune its sensitivity using an adjustable threshold, catering to your application's unique needs.
+`@smakss/react-scroll-direction` is a versatile, lightweight React hook that not only detects the scroll direction but also provides the scroll position in your application with ease. This enhanced functionality includes detecting distances from the top, bottom, left, and right edges of the viewport, making it an ideal solution for advanced scroll-based interactions in your React applications.
 
-This package originated from a [popular StackOverflow response](https://stackoverflow.com/a/62497293/11908502) and has been developed further into a ready-to-implement solution for managing scroll direction detection in your React applications.
+Originally inspired by a [popular StackOverflow response](https://stackoverflow.com/a/62497293/11908502), this package has evolved into a comprehensive tool for managing scroll detection in React applications.
 
 ## Demo
 
-Experience `@smakss/react-scroll-direction` in action on CodeSandbox:
+Experience the extended capabilities of `@smakss/react-scroll-direction` on CodeSandbox:
 
 [![View @smakss/search](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-scroll-direction-tclwvp?fontsize=14&hidenavigation=1&theme=dark)
 
@@ -47,7 +47,7 @@ import useDetectScroll, {
 
 ## Usage
 
-The `useDetectScroll` hook takes an options object that can include the following properties:
+The `useDetectScroll` hook takes an options object with the following properties:
 
 - `thr`: Threshold for scroll direction change detection (default: `0`, accepts only positive values).
 - `axis`: Defines the scroll axis (`"y"` or `"x"`, default: `"y"`).
@@ -55,22 +55,29 @@ The `useDetectScroll` hook takes an options object that can include the followin
 - `scrollDown`: Value returned when scrolling down (y-axis) or right (x-axis) (default: `"down"` for y-axis, `"right"` for x-axis).
 - `still`: Value returned when there's no scrolling activity (default: `"still"`).
 
+The hook returns an object with two properties:
+
+- `scrollDir`: Indicates the scroll direction (`"up"`, `"down"`, `"left"`, `"right"`, or `"still"`).
+- `scrollPosition`: An object containing distances from the top, bottom, left, and right edges of the viewport.
+
 ## Examples
 
-To detect upward or downward scroll:
+To detect both scroll direction and position:
 
 ```js
-const scrollDir = useDetectScroll();
+const { scrollDir, scrollPosition } = useDetectScroll();
 
-// Returns: "up", "down", or "still"
+// scrollDir: "up", "down", "left", "right", or "still"
+// scrollPosition: { top, bottom, left, right }
 ```
 
-To detect left or right scroll:
+To customize for horizontal scroll:
 
 ```js
-const scrollDir = useDetectScroll({ axis: 'x' });
+const { scrollDir, scrollPosition } = useDetectScroll({ axis: Axis.X });
 
-// Returns: "left", "right", or "still"
+// scrollDir: "left", "right", or "still"
+// scrollPosition: { top, bottom, left, right }
 ```
 
 ## Contributing
