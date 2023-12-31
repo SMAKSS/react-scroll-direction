@@ -1,8 +1,9 @@
-name: "@smakss/react-scroll-direction"
+name: CI/CD Pipeline
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -21,8 +22,29 @@ jobs:
             ./path-to-your-build-folder
             package.json
 
-  publish-npm:
+  release:
     needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          registry-url: https://registry.npmjs.org/
+      - run: yarn install
+      - name: Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
+  publish-npm:
+    needs: release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -35,20 +57,12 @@ jobs:
           registry-url: https://registry.npmjs.org/
           scope: "@smakss"
       - run: yarn install
-      - run: yarn generate
-      - run: |
-          if grep -q "beta" package.json; then
-            echo "Publishing Beta to npm"
-            npm publish --tag beta
-          else
-            echo "Publishing Release to npm"
-            npm publish
-          fi
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
   publish-gpr:
-    needs: build
+    needs: release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -61,14 +75,6 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: "@smakss"
       - run: yarn install
-      - run: yarn generate
-      - run: |
-          if grep -q "beta" package.json; then
-            echo "Publishing Beta to GitHub Package Registry"
-            npm publish --tag beta
-          else
-            echo "Publishing Release to GitHub Package Registry"
-            npm publish
-          fi
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
