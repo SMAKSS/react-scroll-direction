@@ -77,5 +77,6 @@
     "typecheck": "tsc -b ."
   },
   "type": "module",
-  "version": "4.0.2"
+  "types": "./dist/index.d.ts",
+  "version": "4.0.3"
 }
