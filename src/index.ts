@@ -72,7 +72,7 @@ type ScrollProps = {
   /**
    * The target represents the scrollable element to check for scroll detection.
    */
-  target?: Element
+  target?: HTMLDivElement
   /**
    * The thr represents the threshold value for scroll detection.
    */
@@ -136,7 +136,7 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
     scrollDown = axis === Axis.Y ? Direction.Down : Direction.Right,
     still = Direction.Still
   } = props;
-
+  
   const [scrollDir, setScrollDir] = useState<Direction>(still);
   const [scrollPosition, setScrollPosition] = useState<ScrollPosition>({
     top: 0,
@@ -183,7 +183,7 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
     return () => {
       target === window ? window.removeEventListener('scroll', updateScrollPosition) : target.removeEventListener('scroll', updateScrollPosition);
     };
-  }, []);
+  }, [target]);
 
   useEffect(() => {
     lastScroll.current = axis === Axis.Y ? window.scrollY : window.scrollX;
@@ -199,7 +199,7 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
     target === window ? window.addEventListener('scroll', onScroll) : target.addEventListener('scroll', onScroll);
 
     return () => target === window ? window.removeEventListener('scroll', onScroll) : target.removeEventListener('scroll', onScroll);
-  }, [axis, updateScrollDir]);
+  }, [target, axis, updateScrollDir]);
 
   return { scrollDir, scrollPosition };
 }
