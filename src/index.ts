@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useCallback, useRef } from 'react';
+import React, {useState, useEffect, useCallback, useRef } from 'react';
 
 /** Enumeration for axis values */
 export enum Axis {
@@ -72,7 +72,7 @@ type ScrollProps = {
   /**
    * The target represents the scrollable element to check for scroll detection.
    */
-  target?: React.RefObject<HTMLDivElement>
+  target?: Element
   /**
    * The thr represents the threshold value for scroll detection.
    */
@@ -163,12 +163,12 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
   useEffect(() => {
     /** Function to update scroll position */
     const updateScrollPosition = () => {
-      const top = target === window ? target.scrollY : target.scrollTop;
-      const left = target === window ? target.scrollX : target.scrollLeft;
-      const bottom = target === window ?
+      const top = target instanceof Window ? target.scrollY : target.scrollTop;
+      const left = target instanceof Window ? target.scrollX : target.scrollLeft;
+      const bottom = target instanceof Window ?
         document.documentElement.scrollHeight - window.innerHeight - top :
         document.documentElement.scrollHeight - target.scrollHeight - top;
-      const right = target === window ?
+      const right = target instanceof Window ?
         document.documentElement.scrollWidth - window.innerWidth - left :
         document.documentElement.scrollHeight - target.scrollWidth - left;
 
@@ -191,7 +191,7 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
     /** Function to handle onScroll event */
     const onScroll = () => {
       if (!ticking.current) {
-        target === window ? window.requestAnimationFrame(updateScrollDir) : target.requestAnimationFrame(updateScrollDir);
+        window.requestAnimationFrame(updateScrollDir);
         ticking.current = true;
       }
     };
