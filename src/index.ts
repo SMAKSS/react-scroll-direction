@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { React, useState, useEffect, useCallback, useRef } from 'react';
 
 /** Enumeration for axis values */
 export enum Axis {
@@ -70,6 +70,10 @@ type ScrollInfo = {
 /** Type declaration for scroll properties */
 type ScrollProps = {
   /**
+   * The target represents the scrollable element to check for scroll detection.
+   */
+  target?: React.RefObject<HTMLDivElement>
+  /**
    * The thr represents the threshold value for scroll detection.
    */
   thr?: number;
@@ -125,6 +129,7 @@ type ScrollProps = {
  */
 function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
   const {
+    target = window,
     thr = 0,
     axis = Axis.Y,
     scrollUp = axis === Axis.Y ? Direction.Up : Direction.Left,
@@ -158,12 +163,14 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
   useEffect(() => {
     /** Function to update scroll position */
     const updateScrollPosition = () => {
-      const top = window.scrollY;
-      const left = window.scrollX;
-      const bottom =
-        document.documentElement.scrollHeight - window.innerHeight - top;
-      const right =
-        document.documentElement.scrollWidth - window.innerWidth - left;
+      const top = target === window ? target.scrollY : target.scrollTop;
+      const left = target === window ? target.scrollX : target.scrollLeft;
+      const bottom = target === window ?
+        document.documentElement.scrollHeight - window.innerHeight - top :
+        document.documentElement.scrollHeight - target.scrollHeight - top;
+      const right = target === window ?
+        document.documentElement.scrollWidth - window.innerWidth - left :
+        document.documentElement.scrollHeight - target.scrollWidth - left;
 
       setScrollPosition({ top, bottom, left, right });
     };
@@ -171,10 +178,10 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
     /** Call the update function when the component mounts */
     updateScrollPosition();
 
-    window.addEventListener('scroll', updateScrollPosition);
+    target === window ? window.addEventListener('scroll', updateScrollPosition) : target.addEventListener('scroll', updateScrollPosition);
 
     return () => {
-      window.removeEventListener('scroll', updateScrollPosition);
+      target === window ? window.removeEventListener('scroll', updateScrollPosition) : target.removeEventListener('scroll', updateScrollPosition);
     };
   }, []);
 
@@ -184,14 +191,14 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
     /** Function to handle onScroll event */
     const onScroll = () => {
       if (!ticking.current) {
-        window.requestAnimationFrame(updateScrollDir);
+        target === window ? window.requestAnimationFrame(updateScrollDir) : target.requestAnimationFrame(updateScrollDir);
         ticking.current = true;
       }
     };
 
-    window.addEventListener('scroll', onScroll);
+    target === window ? window.addEventListener('scroll', onScroll) : target.addEventListener('scroll', onScroll);
 
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => target === window ? window.removeEventListener('scroll', onScroll) : target.removeEventListener('scroll', onScroll);
   }, [axis, updateScrollDir]);
 
   return { scrollDir, scrollPosition };
