@@ -43,6 +43,7 @@ import useDetectScroll, {
 
 The `useDetectScroll` hook takes an options object with the following properties:
 
+- `target`: The target scrollable element from which to detect scroll direction and position (default: `window`, must be an `HTMLDivElement`).
 - `thr`: Threshold for scroll direction change detection (default: `0`, accepts only positive values).
 - `axis`: Defines the scroll axis (`"y"` or `"x"`, default: `"y"`).
 - `scrollUp`: Value returned when scrolling up (y-axis) or left (x-axis) (default: `"up"` for y-axis, `"left"` for x-axis).
@@ -72,6 +73,20 @@ const { scrollDir, scrollPosition } = useDetectScroll({ axis: Axis.X });
 
 // scrollDir: "left", "right", or "still"
 // scrollPosition: { top, bottom, left, right }
+```
+
+To use a custom scrollable element as a target rather than the default window:
+
+```js
+const customElementRef = useRef<HTMLDivElement>(null);
+const [customElement, setCustomElement] = useState<HTMLDivElement>();
+    useEffect(() => {
+        if(customElementRef.current) {
+            setHomepageElement(customElementRef.current);
+        }
+    }, [customElementRef])
+    const scrollDir = useDetectScroll({target: customElement});
+    console.log(scrollDir);
 ```
 
 ## Contributing
