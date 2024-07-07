@@ -72,7 +72,7 @@ type ScrollProps = {
   /**
    * The target represents the scrollable element to check for scroll detection.
    */
-  target?: HTMLDivElement;
+  target?: HTMLDivElement | Window;
   /**
    * The thr represents the threshold value for scroll detection.
    */
@@ -151,14 +151,15 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
 
   /** Function to update scroll direction */
   const updateScrollDir = useCallback(() => {
-    const scroll =
-      target instanceof Window
-        ? axis === Axis.Y
-          ? window.scrollY
-          : window.scrollX
-        : axis === Axis.Y
-          ? target.scrollTop
-          : target.scrollLeft;
+    let scroll: number;
+    if (target instanceof Window) {
+      scroll = axis === Axis.Y ? target.scrollY : target.scrollX;
+    } else {
+      scroll =
+        axis === Axis.Y
+          ? (target as HTMLDivElement).scrollTop
+          : (target as HTMLDivElement).scrollLeft;
+    }
 
     if (Math.abs(scroll - lastScroll.current) >= threshold) {
       setScrollDir(scroll > lastScroll.current ? scrollDown : scrollUp);
@@ -170,17 +171,26 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
   useEffect(() => {
     /** Function to update scroll position */
     const updateScrollPosition = () => {
-      const top = target instanceof Window ? target.scrollY : target.scrollTop;
+      const top =
+        target instanceof Window
+          ? target.scrollY
+          : (target as HTMLDivElement).scrollTop;
       const left =
-        target instanceof Window ? target.scrollX : target.scrollLeft;
+        target instanceof Window
+          ? target.scrollX
+          : (target as HTMLDivElement).scrollLeft;
       const bottom =
-        target instanceof Window
-          ? document.documentElement.scrollHeight - window.innerHeight - top
-          : document.documentElement.scrollHeight - target.scrollHeight - top;
+        document.documentElement.scrollHeight -
+        (target instanceof Window
+          ? target.innerHeight
+          : (target as HTMLDivElement).scrollHeight) -
+        top;
       const right =
-        target instanceof Window
-          ? document.documentElement.scrollWidth - window.innerWidth - left
-          : document.documentElement.scrollHeight - target.scrollWidth - left;
+        document.documentElement.scrollWidth -
+        (target instanceof Window
+          ? target.innerWidth
+          : (target as HTMLDivElement).scrollWidth) -
+        left;
 
       setScrollPosition({ top, bottom, left, right });
     };
@@ -188,26 +198,23 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
     /** Call the update function when the component mounts */
     updateScrollPosition();
 
-    target instanceof Window
-      ? window.addEventListener('scroll', updateScrollPosition)
-      : target.addEventListener('scroll', updateScrollPosition);
+    const targetElement = target as EventTarget;
+    targetElement.addEventListener('scroll', updateScrollPosition);
 
     return () => {
-      target instanceof Window
-        ? window.removeEventListener('scroll', updateScrollPosition)
-        : target.removeEventListener('scroll', updateScrollPosition);
+      targetElement.removeEventListener('scroll', updateScrollPosition);
     };
   }, [target]);
 
   useEffect(() => {
-    lastScroll.current =
-      target instanceof Window
-        ? axis === Axis.Y
-          ? window.scrollY
-          : window.scrollX
-        : axis === Axis.Y
-          ? target.scrollTop
-          : target.scrollLeft;
+    if (target instanceof Window) {
+      lastScroll.current = axis === Axis.Y ? target.scrollY : target.scrollX;
+    } else {
+      lastScroll.current =
+        axis === Axis.Y
+          ? (target as HTMLDivElement).scrollTop
+          : (target as HTMLDivElement).scrollLeft;
+    }
 
     /** Function to handle onScroll event */
     const onScroll = () => {
@@ -217,14 +224,10 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
       }
     };
 
-    target instanceof Window
-      ? window.addEventListener('scroll', onScroll)
-      : target.addEventListener('scroll', onScroll);
+    const targetElement = target as EventTarget;
+    targetElement.addEventListener('scroll', onScroll);
 
-    return () =>
-      target instanceof Window
-        ? window.removeEventListener('scroll', onScroll)
-        : target.removeEventListener('scroll', onScroll);
+    return () => targetElement.removeEventListener('scroll', onScroll);
   }, [target, axis, updateScrollDir]);
 
   return { scrollDir, scrollPosition };
