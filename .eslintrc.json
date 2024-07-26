@@ -30,6 +30,6 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "object-shorthand": "error",
-    "no-console": "warn"
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }]
   }
 }

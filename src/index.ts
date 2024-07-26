@@ -1,99 +1,11 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-
-/** Enumeration for axis values */
-export enum Axis {
-  /**
-   * The x-axis represents the horizontal direction.
-   */
-  X = 'x',
-  /**
-   * The y-axis represents the vertical direction.
-   */
-  Y = 'y'
-}
-
-/** Enumeration for direction values */
-export enum Direction {
-  /**
-   * The up direction represents the scroll direction moving towards the top.
-   */
-  Up = 'up',
-  /**
-   * The down direction represents the scroll direction moving towards the bottom.
-   */
-  Down = 'down',
-  /**
-   * The left direction represents the scroll direction moving towards the left.
-   */
-  Left = 'left',
-  /**
-   * The right direction represents the scroll direction moving towards the right.
-   */
-  Right = 'right',
-  /**
-   * The still direction represents the scroll direction when the user is not scrolling.
-   */
-  Still = 'still'
-}
-
-type ScrollPosition = {
-  /**
-   * The top position represents the distance from the top edge of the page.
-   */
-  top: number;
-  /**
-   * The bottom position represents the distance from the bottom edge of the page.
-   */
-  bottom: number;
-  /**
-   * The left position represents the distance from the left edge of the page.
-   */
-  left: number;
-  /**
-   * The right position represents the distance from the right edge of the page.
-   */
-  right: number;
-};
-
-/** Type declaration for the returned scroll information */
-type ScrollInfo = {
-  /**
-   * The scrollDir represents the current scroll direction.
-   */
-  scrollDir: Direction;
-  /**
-   * The scrollPosition represents the current scroll position.
-   */
-  scrollPosition: ScrollPosition;
-};
-
-/** Type declaration for scroll properties */
-type ScrollProps = {
-  /**
-   * The target represents the scrollable element to check for scroll detection.
-   */
-  target?: HTMLDivElement | Window;
-  /**
-   * The thr represents the threshold value for scroll detection.
-   */
-  thr?: number;
-  /**
-   * The axis represents the scroll axis (x or y).
-   */
-  axis?: Axis;
-  /**
-   * The scrollUp represents the scroll direction when moving up.
-   */
-  scrollUp?: Direction;
-  /**
-   * The scrollDown represents the scroll direction when moving down.
-   */
-  scrollDown?: Direction;
-  /**
-   * The still represents the scroll direction when the user is not scrolling.
-   */
-  still?: Direction;
-};
+import {
+  Axis,
+  Direction,
+  ScrollInfo,
+  ScrollPosition,
+  ScrollProps
+} from './types';
 
 /**
  * useDetectScroll hook.
@@ -107,13 +19,23 @@ type ScrollProps = {
  * import useDetectScroll, { Axis, Direction } from '@smakss/react-scroll-direction';
  *
  * function App() {
+ *   const customElementRef = useRef<HTMLDivElement>(null);
+ *   const [customElement, setCustomElement] = useState<HTMLDivElement>();
+ *
  *   const { scrollDir, scrollPosition } = useDetectScroll({
+ *     target: customElement,
  *     thr: 100,
  *     axis: Axis.Y,
  *     scrollUp: Direction.Up,
  *     scrollDown: Direction.Down,
  *     still: Direction.Still
  *   });
+ *
+ *   useEffect(() => {
+ *     if (customElementRef.current) {
+ *       setCustomElement(customElementRef.current);
+ *     }
+ *   }, [customElementRef]);
  *
  *   return (
  *     <div>
@@ -129,7 +51,7 @@ type ScrollProps = {
  */
 function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
   const {
-    target = window,
+    target = typeof window !== 'undefined' ? window : undefined,
     thr = 0,
     axis = Axis.Y,
     scrollUp = axis === Axis.Y ? Direction.Up : Direction.Left,
@@ -151,14 +73,13 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
 
   /** Function to update scroll direction */
   const updateScrollDir = useCallback(() => {
+    if (!target) return;
+
     let scroll: number;
     if (target instanceof Window) {
       scroll = axis === Axis.Y ? target.scrollY : target.scrollX;
     } else {
-      scroll =
-        axis === Axis.Y
-          ? (target as HTMLDivElement).scrollTop
-          : (target as HTMLDivElement).scrollLeft;
+      scroll = axis === Axis.Y ? target.scrollTop : target.scrollLeft;
     }
 
     if (Math.abs(scroll - lastScroll.current) >= threshold) {
@@ -169,33 +90,33 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
   }, [target, axis, threshold, scrollDown, scrollUp]);
 
   useEffect(() => {
+    if (!target) {
+      console.warn(
+        'useDetectScroll: target is not set. Falling back to window.'
+      );
+      return;
+    }
+
     /** Function to update scroll position */
     const updateScrollPosition = () => {
-      const top =
-        target instanceof Window
-          ? target.scrollY
-          : (target as HTMLDivElement).scrollTop;
+      if (!target) return;
+
+      const top = target instanceof Window ? target.scrollY : target.scrollTop;
       const left =
-        target instanceof Window
-          ? target.scrollX
-          : (target as HTMLDivElement).scrollLeft;
+        target instanceof Window ? target.scrollX : target.scrollLeft;
+
       const bottom =
-        document.documentElement.scrollHeight -
         (target instanceof Window
-          ? target.innerHeight
-          : (target as HTMLDivElement).scrollHeight) -
-        top;
+          ? document.documentElement.scrollHeight - target.innerHeight
+          : target.scrollHeight - target.clientHeight) - top;
       const right =
-        document.documentElement.scrollWidth -
         (target instanceof Window
-          ? target.innerWidth
-          : (target as HTMLDivElement).scrollWidth) -
-        left;
+          ? document.documentElement.scrollWidth - target.innerWidth
+          : target.scrollWidth - target.clientWidth) - left;
 
       setScrollPosition({ top, bottom, left, right });
     };
 
-    /** Call the update function when the component mounts */
     updateScrollPosition();
 
     const targetElement = target as EventTarget;
@@ -207,16 +128,20 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
   }, [target]);
 
   useEffect(() => {
+    if (!target) {
+      console.warn(
+        'useDetectScroll: target is not set. Falling back to window.'
+      );
+      return;
+    }
+
     if (target instanceof Window) {
       lastScroll.current = axis === Axis.Y ? target.scrollY : target.scrollX;
     } else {
       lastScroll.current =
-        axis === Axis.Y
-          ? (target as HTMLDivElement).scrollTop
-          : (target as HTMLDivElement).scrollLeft;
+        axis === Axis.Y ? target.scrollTop : target.scrollLeft;
     }
 
-    /** Function to handle onScroll event */
     const onScroll = () => {
       if (!ticking.current) {
         window.requestAnimationFrame(updateScrollDir);
@@ -233,4 +158,5 @@ function useDetectScroll(props: ScrollProps = {}): ScrollInfo {
   return { scrollDir, scrollPosition };
 }
 
+export { Axis, Direction };
 export default useDetectScroll;

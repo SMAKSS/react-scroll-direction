@@ -80,13 +80,14 @@ To use a custom scrollable element as a target rather than the default window:
 ```js
 const customElementRef = useRef<HTMLDivElement>(null);
 const [customElement, setCustomElement] = useState<HTMLDivElement>();
-    useEffect(() => {
-        if(customElementRef.current) {
-            setHomepageElement(customElementRef.current);
-        }
-    }, [customElementRef])
-    const scrollDir = useDetectScroll({target: customElement});
-    console.log(scrollDir);
+
+const scrollDir = useDetectScroll({target: customElement});
+
+useEffect(() => {
+    if(customElementRef.current) {
+        setHomepageElement(customElementRef.current);
+    }
+}, [customElementRef])
 ```
 
 ## Contributing
