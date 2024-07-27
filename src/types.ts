@@ -1,4 +1,4 @@
-/** Enumeration for axis values */
+// Enumeration for axis values
 export enum Axis {
   /**
    * The x-axis represents the horizontal direction.
@@ -10,7 +10,7 @@ export enum Axis {
   Y = 'y'
 }
 
-/** Enumeration for direction values */
+// Enumeration for direction values
 export enum Direction {
   /**
    * The up direction represents the scroll direction moving towards the top.
@@ -34,6 +34,7 @@ export enum Direction {
   Still = 'still'
 }
 
+// Type declaration for scroll position
 export type ScrollPosition = {
   /**
    * The top position represents the distance from the top edge of the page.
@@ -53,7 +54,7 @@ export type ScrollPosition = {
   right: number;
 };
 
-/** Type declaration for the returned scroll information */
+// Type declaration for the returned scroll information
 export type ScrollInfo = {
   /**
    * The scrollDir represents the current scroll direction.
@@ -65,7 +66,7 @@ export type ScrollInfo = {
   scrollPosition: ScrollPosition;
 };
 
-/** Type declaration for scroll properties */
+// Type declaration for scroll properties
 export type ScrollProps = {
   /**
    * The target represents the scrollable element to check for scroll detection.
