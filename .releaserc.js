@@ -6,19 +6,12 @@ export default {
     plugins: [
         '@semantic-release/commit-analyzer',
         '@semantic-release/release-notes-generator',
+        '@semantic-release/npm',
         [
-            '@semantic-release/npm',
+            '@semantic-release/exec',
             {
-                npmPublish: true,
-                pkgRoot: '.',
-            },
-        ],
-        [
-            '@semantic-release/npm',
-            {
-                npmPublish: true,
-                npmRegistryUrl: 'https://npm.pkg.github.com/',
-                pkgRoot: '.',
+                publishCmd:
+                    'NODE_AUTH_TOKEN=$GITHUB_TOKEN npm publish --registry https://npm.pkg.github.com/ --tag ${nextRelease.channel}',
             },
         ],
         [
