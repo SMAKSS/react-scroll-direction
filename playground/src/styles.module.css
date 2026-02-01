@@ -1,156 +1,156 @@
 :global(:root) {
-  --playground-bg: #0f172a;
-  --playground-card: rgba(15, 23, 42, 0.88);
-  --playground-card-border: rgba(148, 163, 184, 0.2);
-  --playground-card-shadow: 0 20px 60px rgba(15, 23, 42, 0.4);
-  --playground-surface: rgba(30, 41, 59, 0.7);
-  --playground-surface-border: rgba(148, 163, 184, 0.3);
-  --playground-accent: rgba(59, 130, 246, 0.2);
-  --playground-accent-border: rgba(59, 130, 246, 0.5);
-  --playground-text: #f9fafb;
-  --playground-muted: #cbd5f5;
-  --playground-label: #94a3b8;
+    --playground-bg: #0f172a;
+    --playground-card: rgba(15, 23, 42, 0.88);
+    --playground-card-border: rgba(148, 163, 184, 0.2);
+    --playground-card-shadow: 0 20px 60px rgba(15, 23, 42, 0.4);
+    --playground-surface: rgba(30, 41, 59, 0.7);
+    --playground-surface-border: rgba(148, 163, 184, 0.3);
+    --playground-accent: rgba(59, 130, 246, 0.2);
+    --playground-accent-border: rgba(59, 130, 246, 0.5);
+    --playground-text: #f9fafb;
+    --playground-muted: #cbd5f5;
+    --playground-label: #94a3b8;
 }
 
 .wrapper {
-  min-height: 220vh;
-  min-width: 220vw;
-  background: linear-gradient(180deg, #0f172a 0%, #111827 45%, #1f2937 100%);
-  color: var(--playground-text);
-  font-family: 'Space Grotesk', system-ui, sans-serif;
-  padding: 48px 24px 80px;
-  position: relative;
+    min-height: 220vh;
+    min-width: 220vw;
+    background: linear-gradient(180deg, #0f172a 0%, #111827 45%, #1f2937 100%);
+    color: var(--playground-text);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    padding: 48px 24px 80px;
+    position: relative;
 }
 
 .scrollStage {
-  position: absolute;
-  inset: 0;
-  padding: 120px 160px;
+    position: absolute;
+    inset: 0;
+    padding: 120px 160px;
 }
 
 .stageInner {
-  width: 160%;
-  height: 160%;
-  border-radius: 48px;
-  border: 1px dashed var(--playground-surface-border);
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(56, 189, 248, 0.2),
-      transparent 55%
-    ),
-    radial-gradient(
-      circle at 80% 70%,
-      rgba(129, 140, 248, 0.2),
-      transparent 50%
-    );
+    width: 160%;
+    height: 160%;
+    border-radius: 48px;
+    border: 1px dashed var(--playground-surface-border);
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(56, 189, 248, 0.2),
+            transparent 55%
+        ),
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(129, 140, 248, 0.2),
+            transparent 50%
+        );
 }
 
 .stageAccent {
-  width: 60%;
-  height: 60%;
-  margin: 10% auto 0;
-  border-radius: 32px;
-  background: linear-gradient(
-    120deg,
-    rgba(15, 118, 110, 0.3),
-    rgba(59, 130, 246, 0.2)
-  );
-  border: 1px solid rgba(56, 189, 248, 0.2);
+    width: 60%;
+    height: 60%;
+    margin: 10% auto 0;
+    border-radius: 32px;
+    background: linear-gradient(
+        120deg,
+        rgba(15, 118, 110, 0.3),
+        rgba(59, 130, 246, 0.2)
+    );
+    border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
 .card {
-  max-width: 720px;
-  margin: 0 auto;
-  background: var(--playground-card);
-  border: 1px solid var(--playground-card-border);
-  border-radius: 20px;
-  padding: 32px;
-  box-shadow: var(--playground-card-shadow);
-  position: fixed;
-  top: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 64px);
-  max-height: calc(100vh - 64px);
-  overflow: auto;
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--playground-card);
+    border: 1px solid var(--playground-card-border);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: var(--playground-card-shadow);
+    position: fixed;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 64px);
+    max-height: calc(100vh - 64px);
+    overflow: auto;
 }
 
 .badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--playground-accent);
-  border: 1px solid rgba(59, 130, 246, 0.4);
-  border-radius: 999px;
-  padding: 6px 14px;
-  font-size: 13px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--playground-accent);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-  gap: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    gap: 12px;
 }
 
 .directionChip {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  background: var(--playground-surface);
-  border-radius: 16px;
-  padding: 12px 16px;
-  min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--playground-surface);
+    border-radius: 16px;
+    padding: 12px 16px;
+    min-width: 160px;
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(160px, 1fr));
-  gap: 16px;
-  margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+    gap: 16px;
+    margin-top: 12px;
 }
 
 .resetButton {
-  background: var(--playground-accent);
-  color: #e2e8f0;
-  border: 1px solid var(--playground-accent-border);
-  border-radius: 999px;
-  padding: 8px 16px;
-  font-size: 12px;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-  cursor: pointer;
+    background: var(--playground-accent);
+    color: #e2e8f0;
+    border: 1px solid var(--playground-accent-border);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 .title {
-  font-size: 32px;
-  margin: 18px 0 8px;
+    font-size: 32px;
+    margin: 18px 0 8px;
 }
 
 .subtitle {
-  color: var(--playground-muted);
-  margin-bottom: 24px;
-  line-height: 1.6;
+    color: var(--playground-muted);
+    margin-bottom: 24px;
+    line-height: 1.6;
 }
 
 .stat {
-  background: var(--playground-surface);
-  border-radius: 16px;
-  padding: 16px;
+    background: var(--playground-surface);
+    border-radius: 16px;
+    padding: 16px;
 }
 
 .statLabel {
-  font-size: 12px;
-  color: var(--playground-label);
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
+    font-size: 12px;
+    color: var(--playground-label);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
 }
 
 .statValue {
-  font-size: 20px;
-  margin-top: 6px;
+    font-size: 20px;
+    margin-top: 6px;
 }
