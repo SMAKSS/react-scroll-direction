@@ -7,4 +7,5 @@ node_modules
 public
 .github
 tmp
+pnpm-lock.yaml
 *.yml
