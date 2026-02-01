@@ -3,8 +3,10 @@
 .vscode
 build
 dist
+coverage
 node_modules
 public
 .github
 tmp
+pnpm-lock.yaml
 *.yml

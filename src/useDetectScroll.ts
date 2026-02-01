@@ -1,5 +1,11 @@
 import {useCallback, useEffect, useRef, useState} from 'react'
-import {Axis, Direction, ScrollInfo, ScrollPosition, ScrollProps} from './types'
+import {
+    Axis,
+    Direction,
+    ScrollInfo,
+    ScrollPosition,
+    ScrollProps,
+} from './useDetectScroll.types'
 
 /**
  * useDetectScroll hook.
