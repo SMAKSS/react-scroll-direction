@@ -5,22 +5,21 @@
   },
   "description": "Enhance your React apps with advanced scroll detection using @smakss/react-scroll-direction. This powerful hook not only detects scroll direction but also provides scroll position information. Ideal for React, Remix, Next.js, and Gatsby projects, it comes with adjustable sensitivity and supports ES Modules.",
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/react": "^18.3.3",
-    "@typescript-eslint/eslint-plugin": "^7.17.0",
-    "@typescript-eslint/parser": "^7.17.0",
-    "eslint": "^9.8.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "husky": "^9.1.3",
-    "lint-staged": "^15.2.7",
-    "prettier": "^3.3.3",
-    "rollup": "^4.19.1",
-    "typescript": "^5.5.4"
+    "@commitlint/cli": "^20.4.0",
+    "@commitlint/config-conventional": "^20.4.0",
+    "@types/react": "^19.2.10",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "vite": "^6.3.6",
+    "vite-plugin-dts": "^4.5.4"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -59,7 +58,7 @@
     "react scroll direction and position"
   ],
   "license": "MIT",
-  "main": "dist/es/index.js",
+  "main": "dist/index.js",
   "name": "@smakss/react-scroll-direction",
   "peerDependencies": {
     "react": ">=16.8.0"
@@ -71,7 +70,8 @@
   "scripts": {
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|ts|tsx|md|gql|graphql|mdx)\"",
     "format:check": "prettier -l \"**/*.+(js|jsx|json|yml|yaml|css|ts|tsx|md|gql|graphql|mdx)\"",
-    "generate": "rollup -c",
+    "build": "vite build",
+    "generate": "vite build",
     "lint": "npx eslint --cache --cache-location ./node_modules/.cache/.eslintcache --max-warnings=0 .",
     "lint:fix": "npx eslint --fix .",
     "setup": "yarn && husky install",
