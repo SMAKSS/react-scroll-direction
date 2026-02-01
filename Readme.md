@@ -14,12 +14,14 @@ Experience the extended capabilities of `@smakss/react-scroll-direction` on Code
 
 ## Installation
 
-Install `@smakss/react-scroll-direction` via npm or yarn:
+Install `@smakss/react-scroll-direction` via npm, yarn, or pnpm:
 
 ```bash
 npm install @smakss/react-scroll-direction
 # or
 yarn add @smakss/react-scroll-direction
+# or
+pnpm add @smakss/react-scroll-direction
 ```
 
 Then, import it into your project:

@@ -12,7 +12,7 @@ First and foremost, thank you for considering contributing to @smakss/react-scro
 Before you start working on your contribution, you need to set up your development environment. After cloning the repository, run the following commands:
 
 ```bash
-yarn setup
+pnpm setup
 ```
 
 This will install all the necessary development dependencies and set up Git hooks using Husky.

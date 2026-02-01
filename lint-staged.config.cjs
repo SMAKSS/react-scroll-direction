@@ -1,4 +1,4 @@
 module.exports = {
-  "*.+(js|jsx|ts|tsx)": ["yarn lint", () => "yarn typecheck"],
-  "*.+(js|jsx|json|yml|yaml|css|ts|tsx|md|graphql|mdx)": ["yarn format"],
+  "*.+(js|jsx|ts|tsx)": ["pnpm lint", () => "pnpm typecheck"],
+  "*.+(js|jsx|json|yml|yaml|css|ts|tsx|md|graphql|mdx)": ["pnpm format"],
 };

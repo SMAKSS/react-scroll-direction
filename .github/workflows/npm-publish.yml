@@ -9,16 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: yarn
-      - run: yarn generate
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm generate
       - uses: actions/upload-artifact@v4
         with:
           name: built-package
           path: |
-            ./path-to-your-build-folder
+            ./dist
             package.json
 
   publish-npm:
@@ -29,13 +33,17 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: built-package
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
           scope: "@smakss"
-      - run: yarn install
-      - run: yarn generate
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm generate
       - run: |
           if grep -q "beta" package.json; then
             echo "Publishing Beta to npm"
@@ -55,13 +63,17 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: built-package
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: 18
           registry-url: https://npm.pkg.github.com/
           scope: "@smakss"
-      - run: yarn install
-      - run: yarn generate
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm generate
       - run: |
           if grep -q "beta" package.json; then
             echo "Publishing Beta to GitHub Package Registry"

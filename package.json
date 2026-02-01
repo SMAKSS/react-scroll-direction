@@ -18,7 +18,7 @@
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
     "typescript": "^5.9.3",
-    "vite": "^6.3.6",
+    "vite": "^6.4.1",
     "vite-plugin-dts": "^4.5.4"
   },
   "engines": {
@@ -42,7 +42,7 @@
     "direction-and-position-detection",
     "scroll-hook",
     "npm",
-    "yarn",
+    "pnpm",
     "react",
     "remix",
     "nextjs",
@@ -74,9 +74,9 @@
     "generate": "vite build",
     "lint": "npx eslint --cache --cache-location ./node_modules/.cache/.eslintcache --max-warnings=0 .",
     "lint:fix": "npx eslint --fix .",
-    "setup": "yarn && husky install",
+    "setup": "pnpm install && husky",
     "typecheck": "tsc -b .",
-    "update:deps": "rm -rf node_modules yarn.lock && npx npm-check-updates -u && yarn"
+    "update:deps": "rm -rf node_modules pnpm-lock.yaml && npx npm-check-updates -u && pnpm install"
   },
   "type": "module",
   "types": "./dist/index.d.ts",
