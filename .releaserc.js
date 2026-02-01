@@ -11,7 +11,7 @@ export default {
             '@semantic-release/exec',
             {
                 publishCmd:
-                    'NODE_AUTH_TOKEN=$GITHUB_TOKEN npm publish --registry https://npm.pkg.github.com/ --tag ${nextRelease.channel}',
+                    'NPM_CONFIG_REGISTRY=https://npm.pkg.github.com/ NPM_CONFIG_@smakss:registry=https://npm.pkg.github.com/ NODE_AUTH_TOKEN=$GITHUB_TOKEN npm publish --tag ${nextRelease.channel} --access public',
             },
         ],
         [
