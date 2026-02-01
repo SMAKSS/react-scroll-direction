@@ -7,6 +7,7 @@ const packageJson = require('./package.json')
 
 export default defineConfig({
     build: {
+        outDir: 'dist',
         lib: {
             entry: 'src/index.ts',
             formats: ['es'],
@@ -24,6 +25,8 @@ export default defineConfig({
         dts({
             entryRoot: 'src',
             outDir: 'dist',
+            insertTypesEntry: true,
+            exclude: ['playground/**', 'vite.config.ts'],
         }),
     ],
 })

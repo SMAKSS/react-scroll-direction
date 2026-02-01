@@ -5,10 +5,12 @@
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "noEmit": true,
     "outDir": "dist",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo",
     "target": "ESNext"
   },
   "exclude": ["node_modules", "dist", "playground"],
