@@ -42,7 +42,6 @@ export default {
                 'revert', // Revert previous commit
                 'wip', // Work in progress
                 'hotfix', // Critical fixes
-                'test', // Tests
             ],
         ],
 
