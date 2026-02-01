@@ -24,9 +24,24 @@ This will install all the necessary development dependencies and set up Git hook
    - New environment variables
    - New database migrations
    - Any other relevant information
-3. Increase the version numbers in any examples files and the README.md to the new version that this Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
-4. Ensure your PR has a single purpose. If it addresses more than one issue or introduces more than one feature, split them into separate PRs.
-5. Describe your PR thoroughly. Explain the purpose of your PR, how you approached the problem, and include any relevant information or screenshots for context.
+3. Ensure your PR has a single purpose. If it addresses more than one issue or introduces more than one feature, split them into separate PRs.
+4. Describe your PR thoroughly. Explain the purpose of your PR, how you approached the problem, and include any relevant information or screenshots for context.
+
+## Release Process
+
+Releases are automated with semantic-release on every push to the `master` branch.
+
+- Do not manually bump versions or edit the changelog; semantic-release handles both.
+- Follow Conventional Commits so the release type can be inferred.
+- The GitHub Actions workflow requires these secrets:
+  - `NPM_TOKEN` (publish to npm)
+  - `GITHUB_TOKEN` (create GitHub release)
+
+To run a local dry run:
+
+```bash
+pnpm release --dry-run
+```
 
 ## Coding Standards
 
