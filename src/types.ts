@@ -1,95 +1,115 @@
-// Enumeration for axis values
-export enum Axis {
-  /**
-   * The x-axis represents the horizontal direction.
-   */
-  X = 'x',
-  /**
-   * The y-axis represents the vertical direction.
-   */
-  Y = 'y'
-}
+/**
+ * Axis values (const + type)
+ */
+export const Axis = {
+    /**
+     * Horizontal axis.
+     */
+    X: 'x',
+    /**
+     * Vertical axis.
+     */
+    Y: 'y',
+} as const
 
-// Enumeration for direction values
-export enum Direction {
-  /**
-   * The up direction represents the scroll direction moving towards the top.
-   */
-  Up = 'up',
-  /**
-   * The down direction represents the scroll direction moving towards the bottom.
-   */
-  Down = 'down',
-  /**
-   * The left direction represents the scroll direction moving towards the left.
-   */
-  Left = 'left',
-  /**
-   * The right direction represents the scroll direction moving towards the right.
-   */
-  Right = 'right',
-  /**
-   * The still direction represents the scroll direction when the user is not scrolling.
-   */
-  Still = 'still'
-}
+/**
+ * Union of allowed axis values.
+ */
+export type Axis = (typeof Axis)[keyof typeof Axis]
 
-// Type declaration for scroll position
+/**
+ * Direction values (const + type)
+ */
+export const Direction = {
+    /**
+     * Scroll direction toward the top.
+     */
+    Up: 'up',
+    /**
+     * Scroll direction toward the bottom.
+     */
+    Down: 'down',
+    /**
+     * Scroll direction toward the left.
+     */
+    Left: 'left',
+    /**
+     * Scroll direction toward the right.
+     */
+    Right: 'right',
+    /**
+     * No scrolling detected.
+     */
+    Still: 'still',
+} as const
+
+/**
+ * Union of allowed direction values.
+ */
+export type Direction = (typeof Direction)[keyof typeof Direction]
+
+/**
+ * Scroll position values
+ */
 export type ScrollPosition = {
-  /**
-   * The top position represents the distance from the top edge of the page.
-   */
-  top: number;
-  /**
-   * The bottom position represents the distance from the bottom edge of the page.
-   */
-  bottom: number;
-  /**
-   * The left position represents the distance from the left edge of the page.
-   */
-  left: number;
-  /**
-   * The right position represents the distance from the right edge of the page.
-   */
-  right: number;
-};
+    /**
+     * Distance from the top edge.
+     */
+    top: number
+    /**
+     * Distance from the bottom edge.
+     */
+    bottom: number
+    /**
+     * Distance from the left edge.
+     */
+    left: number
+    /**
+     * Distance from the right edge.
+     */
+    right: number
+}
 
-// Type declaration for the returned scroll information
+/**
+ * Scroll info returned by the hook
+ */
 export type ScrollInfo = {
-  /**
-   * The scrollDir represents the current scroll direction.
-   */
-  scrollDir: Direction;
-  /**
-   * The scrollPosition represents the current scroll position.
-   */
-  scrollPosition: ScrollPosition;
-};
+    /**
+     * Current scroll direction.
+     */
+    scrollDir: Direction
+    /**
+     * Current scroll position.
+     */
+    scrollPosition: ScrollPosition
+}
 
-// Type declaration for scroll properties
+/**
+ * Options accepted by the hook
+ */
 export type ScrollProps = {
-  /**
-   * The target represents the scrollable element to check for scroll detection.
-   */
-  target?: HTMLDivElement | Window;
-  /**
-   * The thr represents the threshold value for scroll detection.
-   */
-  thr?: number;
-  /**
-   * The axis represents the scroll axis (x or y).
-   */
-  axis?: Axis;
-  /**
-   * The scrollUp represents the scroll direction when moving up.
-   */
-  scrollUp?: Direction;
-  /**
-   * The scrollDown represents the scroll direction when moving down.
-   */
-  scrollDown?: Direction;
-  /**
-   * The still represents the scroll direction when the user is not scrolling.
-   */
-  still?: Direction;
-};
+    /**
+     * Scroll target element (defaults to window).
+     */
+    target?: HTMLDivElement | Window
+    /**
+     * Threshold for scroll direction changes.
+     */
+    thr?: number
+    /**
+     * Axis to observe.
+     */
+    axis?: Axis
+    /**
+     * Value returned when scrolling up (y) or left (x).
+     */
+    scrollUp?: Direction
+    /**
+     * Value returned when scrolling down (y) or right (x).
+     */
+    scrollDown?: Direction
+    /**
+     * Value returned when no scrolling is detected.
+     */
+    still?: Direction
+}
