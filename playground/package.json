@@ -1,0 +1,23 @@
+{
+  "name": "react-scroll-direction-playground",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --open",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --max-warnings=0 . --no-warn-ignored"
+  },
+  "dependencies": {
+    "@smakss/react-scroll-direction": "workspace:*",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.4.1",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1"
+  }
+}

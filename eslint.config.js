@@ -10,20 +10,21 @@ export default [
   {
     ignores: [
       'dist/**',
+      'playground/*/**',
+      '**/*.d.ts',
       'prettier.config.cjs',
       'lint-staged.config.cjs',
       'commitlint.config.cjs'
-    ]
+    ],
+    linterOptions: { reportUnusedDisableDirectives: 'error' }
   },
   {
     files: ['**/*.{ts,tsx}'],
+    ignores: ['dist/**', 'playground/*/**', '**/*.d.ts'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-          modules: true
-        },
+        ecmaFeatures: { jsx: true, modules: true },
         ecmaVersion: 'latest',
         sourceType: 'module',
         tsconfigRootDir: __dirname,
@@ -48,10 +49,7 @@ export default [
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-          modules: true
-        },
+        ecmaFeatures: { jsx: true, modules: true },
         ecmaVersion: 'latest',
         sourceType: 'module'
       }

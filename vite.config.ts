@@ -1,6 +1,9 @@
+import { createRequire } from 'node:module';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
-import packageJson from './package.json' assert { type: 'json' };
+
+const require = createRequire(import.meta.url);
+const packageJson = require('./package.json');
 
 export default defineConfig({
   build: {
