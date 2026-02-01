@@ -47,10 +47,12 @@ Releases are automated with semantic-release on every push to the `master` and
 - Do not manually bump versions or edit a changelog; releases are published on
   GitHub without committing files back to the repo.
 - Follow Conventional Commits so the release type can be inferred.
-- Releases use npm trusted publishing (OIDC). Configure the repository as a
-  trusted publisher in npm (using this workflow file) and ensure the workflow
-  has `id-token: write` and npm CLI >= 11.5.1.
-- `GITHUB_TOKEN` is used to create GitHub releases.
+- Releases use npm trusted publishing (OIDC) for the npm registry and also
+  publish to GitHub Packages. Configure the repository as a trusted publisher in
+  npm (using this workflow file) and ensure the workflow has `id-token: write`
+  and npm CLI >= 11.5.1.
+- `GITHUB_TOKEN` is used to create GitHub releases and to publish to GitHub
+  Packages.
 
 To run a local dry run:
 
