@@ -41,11 +41,11 @@ hooks using Husky.
 
 ## Release Process
 
-Releases are automated with semantic-release on every push to the `master`
-branch.
+Releases are automated with semantic-release on every push to the `master` and
+`develop` branches.
 
-- Do not manually bump versions or edit the changelog; semantic-release handles
-  both.
+- Do not manually bump versions or edit a changelog; releases are published on
+  GitHub without committing files back to the repo.
 - Follow Conventional Commits so the release type can be inferred.
 - The GitHub Actions workflow requires these secrets:
     - `NPM_TOKEN` (publish to npm)
