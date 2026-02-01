@@ -5,28 +5,38 @@
   },
   "description": "Enhance your React apps with advanced scroll detection using @smakss/react-scroll-direction. This powerful hook not only detects scroll direction but also provides scroll position information. Ideal for React, Remix, Next.js, and Gatsby projects, it comes with adjustable sensitivity and supports ES Modules.",
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/react": "^18.3.3",
-    "@typescript-eslint/eslint-plugin": "^7.17.0",
-    "@typescript-eslint/parser": "^7.17.0",
-    "eslint": "^9.8.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-react-hooks": "^4.6.2",
-    "husky": "^9.1.3",
-    "lint-staged": "^15.2.7",
-    "prettier": "^3.3.3",
-    "rollup": "^4.19.1",
-    "typescript": "^5.5.4"
+    "@commitlint/cli": "^20.4.0",
+    "@commitlint/config-conventional": "^20.4.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.3",
+    "@semantic-release/npm": "^13.1.3",
+    "@semantic-release/release-notes-generator": "^14.1.0",
+    "@types/react": "^19.2.10",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "semantic-release": "^25.0.3",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1",
+    "vite-plugin-dts": "^4.5.4"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.14.0"
   },
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
   "files": [
     "dist"
@@ -43,7 +53,7 @@
     "direction-and-position-detection",
     "scroll-hook",
     "npm",
-    "yarn",
+    "pnpm",
     "react",
     "remix",
     "nextjs",
@@ -59,7 +69,7 @@
     "react scroll direction and position"
   ],
   "license": "MIT",
-  "main": "dist/es/index.js",
+  "main": "dist/index.js",
   "name": "@smakss/react-scroll-direction",
   "peerDependencies": {
     "react": ">=16.8.0"
@@ -71,12 +81,21 @@
   "scripts": {
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|ts|tsx|md|gql|graphql|mdx)\"",
     "format:check": "prettier -l \"**/*.+(js|jsx|json|yml|yaml|css|ts|tsx|md|gql|graphql|mdx)\"",
-    "generate": "rollup -c",
-    "lint": "npx eslint --cache --cache-location ./node_modules/.cache/.eslintcache --max-warnings=0 .",
-    "lint:fix": "npx eslint --fix .",
-    "setup": "yarn && husky install",
-    "typecheck": "tsc -b .",
-    "update:deps": "rm -rf node_modules yarn.lock && npx npm-check-updates -u && yarn"
+    "build": "rm -rf dist && vite build",
+    "build:playground": "pnpm -C playground build",
+    "generate": "rm -rf dist && vite build",
+    "lint:main": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --max-warnings=0 \"src/**/*.{js,jsx,ts,tsx}\" eslint.config.js vite.config.ts --no-warn-ignored",
+    "lint:playground": "pnpm -C playground lint",
+    "lint": "pnpm lint:main && pnpm lint:playground",
+    "lint:fix:main": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\" eslint.config.js vite.config.ts --no-warn-ignored",
+    "lint:fix:playground": "pnpm -C playground eslint --fix . --no-warn-ignored",
+    "prepare": "if [ \"$NODE_ENV\" != \"production\" ]; then husky; fi",
+    "setup": "pnpm install && husky",
+    "release": "semantic-release",
+    "typecheck:main": "tsc -b .",
+    "typecheck:playground": "pnpm build && pnpm -C playground exec tsc -p tsconfig.json",
+    "typecheck": "pnpm typecheck:main && pnpm typecheck:playground",
+    "update:deps": "rm -rf node_modules pnpm-lock.yaml && npx npm-check-updates -u && pnpm install"
   },
   "type": "module",
   "types": "./dist/index.d.ts",

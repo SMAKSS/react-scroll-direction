@@ -4,10 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: daily
-    reviewers:
-      - "SMAKSS"
-    assignees:
-      - "SMAKSS"
     labels:
       - "dependencies"
     open-pull-requests-limit: 5

@@ -1,4 +1,4 @@
-import useDetectScroll from './useDetectScroll';
+import useDetectScroll from './useDetectScroll'
 
-export default useDetectScroll;
-export { Axis, Direction } from './types';
+export default useDetectScroll
+export {Axis, Direction} from './types'

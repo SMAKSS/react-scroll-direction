@@ -2,7 +2,7 @@ name: PR Checks
 
 on:
   pull_request:
-    branches: [master]
+    branches: [master, develop]
 
 jobs:
   build:
@@ -18,45 +18,42 @@ jobs:
         echo "Head ref: ${{ github.head_ref }}"
         echo "Base ref: ${{ github.base_ref }}"
 
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10
+
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 20
-
-    - name: Cache dependencies
-      uses: actions/cache@v4
-      with:
-        path: |
-          **/node_modules
-        key: ${{ runner.os }}-node-18-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-node-18-yarn-
+        node-version-file: .nvmrc
+        cache: pnpm
 
     - name: Install dependencies
-      run: yarn install
+      run: pnpm install --frozen-lockfile
 
     - name: Type check
-      run: yarn typecheck
+      run: pnpm typecheck
 
     - name: Check code quality
       run: |
-        yarn lint
-        yarn format:check
-        yarn run --if-present generate
+        pnpm lint
+        pnpm format:check
+        pnpm run --if-present generate
 
     - name: Security Audit
-      run: yarn audit --level moderate || true
+      run: pnpm audit --audit-level moderate || true
       continue-on-error: true
 
     - name: Security Audit Summary
       if: success() || failure()
-      run: yarn audit --summary
+      run: pnpm audit --audit-level moderate || true
 
     - name: Archive production artifacts
       uses: actions/upload-artifact@v4
       with:
         name: build-artifacts
-        path: ./build/
+        path: ./dist/
 
     - name: Error handling
       if: failure()
