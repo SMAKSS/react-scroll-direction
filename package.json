@@ -30,7 +30,7 @@
     "vite-plugin-dts": "^4.5.4"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.14.0"
   },
   "exports": {
     ".": {
