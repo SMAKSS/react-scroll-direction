@@ -5,7 +5,7 @@
   },
   "description": "Enhance your React apps with advanced scroll detection using @smakss/react-scroll-direction. This powerful hook not only detects scroll direction but also provides scroll position information. Ideal for React, Remix, Next.js, and Gatsby projects, it comes with adjustable sensitivity and supports ES Modules.",
   "devDependencies": {
-    "@commitlint/cli": "^20.4.0",
+    "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.4.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
