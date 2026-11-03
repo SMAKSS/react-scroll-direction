@@ -1,6 +1,5 @@
 packages:
-  - .
-  - playground
-
+    - .
+    - playground
 allowBuilds:
-  esbuild: true
+    esbuild: true
