@@ -26,7 +26,9 @@ jobs:
           scope: "@smakss"
           cache: pnpm
       - name: Ensure npm CLI supports OIDC
-        run: npm install -g npm@11.5.1
+        run: |
+          npm install -g npm@latest
+          npm --version
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Release (master)
