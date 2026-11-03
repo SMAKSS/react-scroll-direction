@@ -6,7 +6,7 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
       issues: write
@@ -24,9 +24,6 @@ jobs:
           node-version-file: .nvmrc
           cache: true
           require-lockfile: true
-
-      - name: Ensure npm CLI supports trusted publishing
-        run: npm install -g npm@11.5.1
 
       - run: pnpm build
 
