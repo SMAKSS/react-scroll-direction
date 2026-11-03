@@ -25,6 +25,11 @@ jobs:
           cache: true
           require-lockfile: true
 
+      - name: Install npm CLI for trusted publishing
+        run: |
+          pnpm add --global npm@latest
+          npm --version
+
       - run: pnpm build
 
       - name: Release (master)

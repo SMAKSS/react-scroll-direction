@@ -26,6 +26,11 @@ jobs:
           cache: true
           require-lockfile: true
 
+      - name: Verify npm CLI setup for trusted publishing
+        run: |
+          pnpm add --global npm@latest
+          npm --version
+
       - name: Run tests
         run: pnpm run test
 
